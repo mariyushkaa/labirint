@@ -33,7 +33,7 @@ class Player(GameSprite):
         if self.y_speed > 0:
             for p in platforms_touched:
                 self.y_speed = 0
-                if rect.top < self.rect.bottom:
+                if p.rect.top < self.rect.bottom:
                     self.rect.bottom = p.rect.top
         elif self.y_speed < 0:
             for p in platforms_touched:
@@ -65,8 +65,8 @@ class Bullet(GameSprite):
         self.speed = player_speed
 
     def update(self):
-        self.rect.x +=self_speed
-        if self.rect.x > win_widht+10:
+        self.rect.x += self.speed
+        if self.rect.x > win_width+10:
             self.kill()
 
         
@@ -146,8 +146,8 @@ while run:
 
         if sprite.spritecollide(packman, monsters, False):
             finish = True
-            img = image.load('')
-            d = img.get_widht() // img.get_height()
+            img = image.load('brick.png')
+            d = img.get_width() // img.get_height()
             window.fill((255, 255, 255))
             window.blit(transform.scale(img, (win_height * d, win_height)), (90, 0))
         
@@ -157,3 +157,4 @@ while run:
             window.fill((255,255,255))
             window.blit(transform.scale(img, (win_width, win_height)), (0,0))
     display.update()
+
